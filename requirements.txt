@@ -1,0 +1,12 @@
+highlight-text==0.2
+joblib==1.2.0
+matplotlib==3.6.3
+matplotlib-inline==0.1.6
+mplsoccer==1.1.10
+numpy==1.24.2
+openpyxl==3.1.1
+pandas==1.5.3
+Pillow==9.4.0
+scikit-learn==1.2.1
+sklearn==0.0.post5
+streamlit==1.18.1
