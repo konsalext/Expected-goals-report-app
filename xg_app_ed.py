@@ -400,7 +400,7 @@ with tab_three :
             st.metric("AUC-score" , "0.7856")
                             
         st.markdown(" Model accuracy is about 90/100 shown also by the 6-fold cross validation performed which is quite good.While the model is kinda terrible at\
-                    predicting whether a chance is actually going to be a goal _(recall score)_ the ones that actually get classified as goals are almost alawys goals \
+                    predicting whether a chance is actually going to be a goal _(recall score)_ the ones that actually get classified as goals are almost always goals \
                     _(precision)_ .\n - _(regarding the low recall score , i think the scarcity of goals in general in the sport -it is the nature of football- and\
                     the subsequent imbalance of 0s and 1s in the target variable is messing with those results.)_")
         st.markdown('''Anyway , after all the purpose of an xGoals model is not to give us definite predictions like _"Goal or not , 0 or 1"_ but to provide \
