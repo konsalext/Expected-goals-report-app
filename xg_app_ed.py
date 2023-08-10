@@ -200,7 +200,7 @@ with tab_two :
             away_dist_line=100 - dist_coords_away
             # get the top players in terms of xg
             df_home_grouped=df_home.groupby("Player").sum()
-            df_away_grouped=df_away.groupby("Player").mean()
+            df_away_grouped=df_away.groupby("Player").sum()
             df_home_grouped = df_home_grouped.sort_values(by="xGoals",ascending = False)
             df_away_grouped = df_away_grouped.sort_values(by="xGoals" , ascending = False)
             top_home_player = df_home_grouped.index[0]
