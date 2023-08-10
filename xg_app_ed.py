@@ -418,9 +418,9 @@ with tab_three :
                     pitch and/or the goal might be idfferent.\n - Furthermore , the data used (top-5 leagues , World Cup , EURO) kinda _"tilts+_ towards the top level of the game ,\
                     and might not be as representative as it could be of how the game is played in the lower divisions.''')
     with st.expander("How about some extra info on xG ? :soccer: :bar_chart:"):
-        st.markdown (" - the probability of your aeverage chance being a goal is about **10%**. In this dataset , for a total of 83.371 chances we had 8.442 goals (9,87%).\
+        st.markdown (" - the probability of your average chance being a goal is about **10%**. In this dataset , for a total of 83.371 chances we had 8.442 goals (9,87%).\
                         \n - The xG of a penalty kick is **0.76** _(by the way this is a non-penalty xG model so please don't log any penalties , just use the 0.76 constant instead)_.\
-                        \n - according to a lot of providers such as OPTA , an xG value of about **0.4** and higher qualifies as a big chance.")
+                        \n - according to a lot of providers such as OPTA , an xG value of about **0.3** and higher qualifies as a big chance.")
     with st.expander("About the author"):
         st.markdown(" - My name is Konstantinos Alexiou and i live in Athens , Greece.\n - I have a Bsc. in Physical Education and Sports Sciences as well as\
                     a Master's in performance analysis in\
