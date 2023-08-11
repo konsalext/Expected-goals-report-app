@@ -25,6 +25,22 @@ def log_reg():
 
 xG_model=log_reg()
 
+@st.cache_data
+def sample_one():
+    df_city = pd.read_csv("City_vs_arsenal_events.csv")
+    return df_city
+@st.cache_data
+def sample_two():
+    df_osfp=pd.read_csv("OSFP_vs_Genk_events.csv")
+    return df_osfp
+
+first_sample_game=sample_one()
+second_sample_game=sample_two()
+
+data_for_City = first_sample_game.to_csv().encode("utf-8")
+data_for_osfp = second_sample_game.to_csv().encode("utf-8")
+
+
 def get_xG_probabilities (df):
     # we clean the events and teams column because if there is extra white space during typing ,  df.loc won't work afterwards
     df["events_cleaned"]=df.Event.str.strip()
@@ -150,6 +166,15 @@ with tab_one:
         time.sleep(2)
         st.success("File uploaded successfully !", icon ="✅")
 
+     with st.expander ("In case you don't have data and you want to try it anyway... 👇"):
+        st.markdown("..feel free to use one of the two games i have tagged for you :\n - Man.City vs Arsenal 1-1 (Community shield 23-24)\n - Olympiacos vs Genk 1-0\
+                    (Europa League qualifiers 23-24)")
+        city_button = st.download_button(label="City-Arsenal 1-1",data=data_for_City ,
+                                   file_name=f"match events for City vs Arsenal.csv",
+                                   mime="text/csv")
+        osfp_button = st.download_button(label="Olympiacos - Genk 1-0",data=data_for_osfp,file_name="match events for Olympiacos vs Genk.csv",
+                                         mime="text/csv")
+
 with tab_two :
 
     col_one , col_two = st.columns(2)
@@ -172,6 +197,12 @@ with tab_two :
             #separate dataframes to home and away teams based on user's input
             df_home = edited_df.loc[edited_df["Teams"]==home_team_clean]
             df_away=edited_df.loc[edited_df["Teams"]==away_team_clean]
+
+            #separate shots from headers (they're gonna be plotted differently)
+            df_only_shots_home = df_home.loc[df_home["Events"]=="Shot"]
+            df_only_shots_away=df_away.loc[df_away["Events"]=="Shot"]
+            df_only_headers_home=df_home.loc[df_home["Events"]=="Header"]
+            df_only_headers_away=df_away.loc[df_away["Events"]=="Header"]
                     
             # define all the metrics into variables
             xgoals_home = df_home["xGoals"].tolist()
@@ -252,6 +283,7 @@ with tab_two :
         st.subheader("Step 3 : Results time !")
         
         if home_team and away_team and the_uploaded_data_file is not None :
+            data_for_export_df=edited_df[["Teams","Player","Events","distance_from_goal","goal_mouth_angle","xGoals"]]
             data_for_export = edited_df.to_csv().encode("utf-8")
             data_button = st.download_button(label="Download the data :bar_chart:",data=data_for_export ,
                                    file_name=f"data for {home_team} vs {away_team}.csv",
@@ -274,10 +306,16 @@ with tab_two :
                                                               ,{"color":"dodgerblue","fontsize":21,"fontweight":"bold"}],
                                          fontsize=16,color="white",fontname="monospace",ax=axs["title"])
                 # xgoals circles
-                home_xgoals=pitch.scatter(df_home.x_for_oppo,df_home.y_for_oppo,s=df_home["xGoals"]*900,
-                                          c="firebrick",edgecolors="white", alpha=0.85,marker="o",ax=axs["pitch"])
-                away_xgoals=pitch.scatter(df_away.X,df_away.Y,s=df_away["xGoals"]*900,
-                                         c="dodgerblue",edgecolors="white", marker="o",alpha=0.85 ,ax=axs["pitch"])
+                home_xgoals_from_shots=pitch.scatter(df_only_shots_home.x_for_oppo,df_only_shots_home.y_for_oppo,s=df_only_shots_home["xGoals"]*900,
+                                          c="firebrick",edgecolors="white", alpha=0.7,marker="o",ax=axs["pitch"])
+                away_xgoals_from_shots=pitch.scatter(df_only_shots_away.X,df_only_shots_away.Y,s=df_only_shots_away["xGoals"]*900,
+                                         c="dodgerblue",edgecolors="white", marker="o",alpha=0.7 ,ax=axs["pitch"])
+                if df_only_headers_home.shape[0] !=0:
+                    home_headed_chances = pitch.scatter(df_only_headers_home.x_for_oppo , df_only_headers_home.y_for_oppo,s=df_only_headers_home["xGoals"]*900 ,
+                                                        c="firebrick" , hatch="///",edgecolor="white",marker="o",alpha=0.7,ax=axs["pitch"])
+                if df_only_headers_away.shape[0] !=0:
+                    away_headed_chances = pitch.scatter(df_only_headers_away.X,df_only_headers_away.Y , s=df_only_headers_away["xGoals"]*900 , c="dodgerblue",
+                                                        hatch="///",edgecolor="white",marker="o",alpha=0.7,ax=axs["pitch"])
 
                 # plot average distance of shots
                 dist_home_annot=pitch.lines(0,2.5,home_dist_line,2.5,color="firebrick",alpha=0.60,comet=True,lw=9,
@@ -356,6 +394,12 @@ with tab_two :
                 color="white",fontstyle="italic",fontweight="light",fontsize=9,fontfamily="monospace",ha="left")
 
                 st.success("report generated successfully !",icon="✅")
+                if home_team=="Olympiacos" and away_team=="Genk" :
+                    st.info("i noticed that you used one of the pre-tagged games i provided for you.Just for reference and comparison , Wyscout model's xG values for this one were\
+                            Olympiacos (1,29 xG) and Genk (1,40 xG) so a difference of 0,11 xG in favor of Genk.Does the report you get resemble these results ?",icon="ℹ️")
+                if home_team=="City" and away_team=="Arsenal":
+                    st.info("i noticed that you used one of the pre-tagged games i provided for you.Just for reference and comparison , Wyscout model's xG values for this one were\
+                            City (0,94 xG) and Arsenal (1,04 xG) so a difference of 0,10 xG in favor of Arsenal.Does the report you get resemble these results ?",icon="ℹ️")
                 plt.savefig("the_plot.png",dpi=200,bbox_inches="tight")
                 st.pyplot(fig)
                 with open("the_plot.png","rb") as file :
