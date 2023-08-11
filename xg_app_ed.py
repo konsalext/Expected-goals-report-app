@@ -165,16 +165,15 @@ with tab_one:
         edited_df = get_xG_probabilities(the_data)
         time.sleep(2)
         st.success("File uploaded successfully !", icon ="✅")
-
-     with st.expander ("In case you don't have data and you want to try it anyway... 👇"):
-         
-         st.markdown("..feel free to use one of the two games i have tagged for you :\n - Man.City vs Arsenal 1-1 (Community shield 23-24)\n - Olympiacos vs Genk 1-0\
-                    (Europa League qualifiers 23-24)")
+    with st.expander ("In case you don't have data and you want to try it anyway... 👇"):
+        st.markdown("..feel free to use one of the two games i have tagged for \
+        you :\n - Man.City vs Arsenal 1-1 (Community shield 23-24)\n - Olympiacos vs Genk 1-0\
+                (Europa League qualifiers 23-24)")
          city_button = st.download_button(label="City-Arsenal 1-1",data=data_for_City ,
-                                   file_name=f"match events for City vs Arsenal.csv",
-                                   mime="text/csv")
-         osfp_button = st.download_button(label="Olympiacos - Genk 1-0",data=data_for_osfp,file_name="match events for Olympiacos vs Genk.csv",
-                                         mime="text/csv")
+                               file_name=f"match events for City vs Arsenal.csv",
+                               mime="text/csv")
+        osfp_button = st.download_button(label="Olympiacos - Genk 1-0",data=data_for_osfp,file_name="match events for Olympiacos vs Genk.csv",
+                                     mime="text/csv")
 
 with tab_two :
 
