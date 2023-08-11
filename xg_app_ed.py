@@ -382,9 +382,9 @@ with tab_two :
                 away_head_num=axs["pitch"].text(63,71,headers_away,fontsize=10,fontfamily="monospace",fontweight="bold",
                                                 color="white",zorder=2,bbox=props_num_away)
 
-                player_with_most_xg_home = axs["pitch"].text(1.5,98,s=f"{top_home_player} ({top_home_xg} xG)",bbox=props_num_home,
+                player_with_most_xg_home = axs["pitch"].text(1.5,98,s=f"most xg :{top_home_player} ({top_home_xg} xG)",bbox=props_num_home,
                                                              fontsize=9,fontfamily="monospace" , color="white")
-                player_with_most_xg_away = axs["pitch"].text(51.5,98,s=f"{top_away_player} ({top_away_xg} xG)",bbox=props_num_away,
+                player_with_most_xg_away = axs["pitch"].text(51.5,98,s=f"most xg : {top_away_player} ({top_away_xg} xG)",bbox=props_num_away,
                                                              fontsize=9,fontfamily="monospace" , color="white")
 
                 
