@@ -288,7 +288,7 @@ with tab_two :
             data_button = st.download_button(label="Download the data :bar_chart:",data=data_for_export ,
                                    file_name=f"data for {home_team} vs {away_team}.csv",
                                    mime="text/csv")
-            if st.button("generate xGoals match report"):
+            if st.button("generate xGoals match report :bar_chart:"):
                 
                 pitch = Pitch(pitch_type="wyscout",axis=False,label=False,tick=False,half=False,pitch_color="#323332",line_color="white",
                      line_alpha=0.65,linewidth=2,goal_type="box",corner_arcs=True,line_zorder=1)
