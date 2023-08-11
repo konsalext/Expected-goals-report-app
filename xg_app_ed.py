@@ -390,7 +390,7 @@ with tab_two :
                 
 
                 the_caption = axs["endnote"].text(0.40,0.26,\
-                s="* bigger circle = higher-xG chance\n* xPoints and win probability simmed over 10.000 games\n* by Alexiou Kon/nos",\
+                s="* bigger circle = higher-xG chance , crossed circles are headers\n* xPoints and win probability simmed over 10.000 games\n* by Alexiou Kon/nos",\
                 color="white",fontstyle="italic",fontweight="light",fontsize=9,fontfamily="monospace",ha="left")
 
                 st.success("report generated successfully !",icon="✅")
