@@ -301,7 +301,7 @@ with tab_two :
         
 
                 # plot title
-                the_title= HighlightText(x=0.20,y=0.50,s=f"xGoals report : <{home_team_clean}> vs <{away_team_clean}> ",
+                the_title= HighlightText(x=0.08,y=0.50,s=f"xGoals report : <{home_team_clean}> vs <{away_team_clean}> ",
                                          highlight_textprops=[{"color":"firebrick","fontsize":21,"fontweight":"bold"}
                                                               ,{"color":"dodgerblue","fontsize":21,"fontweight":"bold"}],
                                          fontsize=16,color="white",fontname="monospace",ax=axs["title"])
