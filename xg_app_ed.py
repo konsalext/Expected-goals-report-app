@@ -284,7 +284,7 @@ with tab_two :
         
         if home_team and away_team and the_uploaded_data_file is not None :
             data_for_export_df=edited_df[["Teams","Player","Events","distance_from_goal","goal_mouth_angle","xGoals"]]
-            data_for_export = edited_df.to_csv().encode("utf-8")
+            data_for_export = data-for_export_df.to_csv().encode("utf-8")
             data_button = st.download_button(label="Download the data :bar_chart:",data=data_for_export ,
                                    file_name=f"data for {home_team} vs {away_team}.csv",
                                    mime="text/csv")
